@@ -1,0 +1,37 @@
+task main(){
+     SetSensorLowspeed(IN_4);
+      OnFwd(OUT_AC,100);
+                 Wait(2000);
+                 OnFwd(OUT_AC, -50);
+                 Wait(2000);
+                 OnFwd(OUT_A, 70);
+                 OnFwd(OUT_C, -70);
+                 Wait(3000);
+                 Off(OUT_AC);
+     
+     while(true){
+                 float dist = SensorUS(IN_4);
+                 if(dist > 40){
+                        // OnFwd(OUT_AC, 75);
+                 }
+                 else{
+                     // Off(OUT_AC);
+                      OnFwd(OUT_B, 80);
+                      Wait(900);
+                      OnFwd(OUT_B, -50);
+                      Wait(500);
+
+                      }
+                      
+                      
+     }
+}
+
+                /* OnFwd(OUT_AC,100);
+                 Wait(2000);
+                 OnFwd(OUT_AC, -50);
+                 Wait(2000);
+                 OnFwd(OUT_A, 70);
+                 OnFwd(OUT_C, -70);
+                 Wait(3000);
+                 Off(OUT_AC);*/
