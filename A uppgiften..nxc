@@ -1,0 +1,58 @@
+#define TURN_TIME 2000
+#define K_avstand 20
+task main() {
+     SetSensorLowspeed(IN_4);
+     int dist = SensorUS(IN_4);
+     int closestPoint = 0;
+
+
+ //OnFwdReg(OUT_AC,50,OUT_REGMODE_SYNC);
+ //Wait(12000);
+ 
+   while (dist >= closestPoint){
+    OnFwd(OUT_C, 50);
+            Wait(30);
+            closestPoint = dist;
+            dist = SensorUS(IN_4);
+            }
+ 
+ 
+   while(closestPoint >= dist){
+            OnFwd(OUT_C, 50);
+            Wait(30);
+            closestPoint = dist;
+            dist = SensorUS(IN_4);
+     }
+
+        RotateMotor(OUT_C, -50, 270);
+
+      if (dist < K_avstand){
+          while (dist < K_avstand){
+              OnFwdReg(OUT_AC ,-20,OUT_REGMODE_SPEED);
+              Wait(3);
+              dist = SensorUS(IN_4);}}
+      else if (dist > K_avstand){
+          while (dist > K_avstand){
+              OnFwdReg(OUT_AC ,20,OUT_REGMODE_SPEED);
+              Wait(3);
+              dist = SensorUS(IN_4);}}
+      else{}
+
+
+    Off(OUT_AC);
+    
+    Wait(2000);
+    Off(OUT_AC);
+    OnFwd(OUT_C, -50);
+    Wait(TURN_TIME);
+    Off(OUT_AC);
+
+
+OnFwdReg(OUT_AC,50,OUT_REGMODE_SYNC);
+Wait(15000);
+ Off(OUT_AC);
+ 
+ OnFwd(OUT_B,100);
+ Wait(500);
+ 
+}
